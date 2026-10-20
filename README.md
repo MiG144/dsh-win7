@@ -73,6 +73,7 @@ flowchart LR
 | 工作区 | 文件读写、代码高亮、Markdown 预览 |
 | 模型 | 任意 OpenAI 兼容 API，内网或公网 |
 | 桌面 | 托盘、单实例、窗口位置记忆、断线重连 |
+| 图片附件 | 支持贴图与附件（`sharp` 已在 Win7 验证） |
 | 版本检查 | 启动时自动检查，「帮助 → 检查更新」可手动触发 |
 | 开机启动 | 应用菜单开关，写入 Windows 登录项 |
 
@@ -80,7 +81,8 @@ flowchart LR
 
 | 能力 | 原因 |
 | --- | --- |
-| 终端 | `node-pty` 的 ConPTY 需要 Windows 10 1809 及以上 |
+| 终端 | `node-pty` 在 Win7 上无法启动 ConPTY |
+| 语音输入 | `sherpa-onnx` 依赖的 Windows API 在 Win7 上缺失 |
 | Office 技能 | 依赖 Python 3.12，Windows 7 无法运行 |
 | 自动更新、代码签名 | 需要证书与稳定的分发通道 |
 

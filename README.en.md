@@ -75,6 +75,7 @@ model calls and tool execution.
 | Workspace | File read/write, syntax highlighting, Markdown preview |
 | Models | Any OpenAI-compatible API, intranet or public |
 | Desktop | Tray, single instance, window state, reconnect |
+| Image attachments | Paste and attach images (`sharp` verified on Win7) |
 | Update check | Automatic on launch; manual via Help → Check for updates |
 | Launch at login | Toggle in the app menu (Windows login item) |
 
@@ -82,7 +83,8 @@ model calls and tool execution.
 
 | Capability | Why |
 | --- | --- |
-| Terminal | `node-pty` ConPTY requires Windows 10 1809+ |
+| Terminal | `node-pty` cannot launch ConPTY on Windows 7 |
+| Voice input | The Windows APIs used by `sherpa-onnx` are missing on Windows 7 |
 | Office skills | Depend on Python 3.12, which cannot run on Windows 7 |
 | Auto-update, code signing | Requires a certificate and a stable distribution channel |
 

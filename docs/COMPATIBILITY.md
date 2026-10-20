@@ -36,10 +36,10 @@ SHA-1 `7cc76b0015220de956328fb934d61b710a94293d`。
 | 流式对话 | ✅ 已验证 | 约 180 tok/s（Host 侧） |
 | 托盘 | ✅ 已验证 | 关窗进托盘、单击唤回 |
 | 断连自动恢复 | ✅ 已验证 | Host 重启后自动重连 |
-| 终端 | ❌ 未支持 | `node-pty` ConPTY 需 Win10 1809+ |
+| 终端 | ❌ 不可用 | 实测 `pty.spawn` 报 `Cannot launch conpty` |
 | Office 技能 | ❌ 未支持 | 需 Python 3.8 降级运行时 |
-| 语音输入 | ⏳ 未验证 | sherpa-onnx 为 NAPI，理论可用 |
-| 图片附件 | ⏳ 未验证 | sharp 为 NAPI，理论可用 |
+| 语音输入 | ❌ 不可用 | `sherpa-onnx-win-x64` 加载报「找不到指定的程序」 |
+| 图片附件 | ✅ 可用 | `sharp` 加载与图像编码均通过 |
 | 自动更新 | ❌ 不做 | 无签名、无稳定 feed |
 
 ## Chromium 108 的差异

@@ -19,6 +19,19 @@
 
 ![Harness7 在 Windows 7 上运行](assets/win7-first-run.png)
 
+## 原生模块探测
+
+用 Harness7 自带的 Node 22 在 Win7 SP1 x64 上逐个加载并实际调用：
+
+| 模块 | 加载 | 实际调用 | 结论 |
+| --- | --- | --- | --- |
+| `sharp` | ✅ | ✅ 编码 16×16 PNG 成功 | 图片附件可用 |
+| `node-pty` | ✅ | ❌ `Cannot launch conpty` | 终端不可用 |
+| `sherpa-onnx-win-x64` | ❌ | — | 语音输入不可用 |
+| `koffi` | ✅ | — | Windows API 调用可用 |
+| `node-addon-require-builtin` | ✅ | — | 可用 |
+
+> `sharp` 只验证了模块层面的图像处理；UI 里的贴图交互未逐项点测。
 ## 不可用或未验证
 
 - **终端、Office 技能**：依赖 Win10 的 ConPTY 与 Python 3.12，当前不可用（见 [兼容性](COMPATIBILITY.md)）
