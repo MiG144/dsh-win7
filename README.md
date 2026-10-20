@@ -57,10 +57,10 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 | — | Electron 22 外壳在真实 Win7 上运行 | ✅ 已验证 |
 | — | 外壳连远端 Host：登录/中文/托盘/断连恢复/免 token 重启 | ✅ 已验证 |
 | **Phase 0** | Node 22 + 官方 DSH Host 在 **Win7 本机**跑通 | ✅ **通过**（[记录](docs/PHASE0.md)） |
-| **Phase 1** | 单机自包含便携包（外壳 + Node 22 + Host）已在 Win7 启动成功；安装包与向导进行中 | 🔧 进行中 |
+| **Phase 1** | 单机安装包与便携版已发布（`v0.2.0`，内置 Node 22 + Host） | ✅ 已发布 |
 | Phase 2 | 终端、Office、语音等能力迁移 | 📋 计划中 |
 
-发布：`v0.1.0` 只含外壳（需外部 Host）；`v0.2.0` 起提供**单机安装包**。
+发布：`v0.2.0` 提供**单机安装包**（内置 Node 22 与 Host）；`v0.1.0` 只含外壳。
 
 ## 系统要求
 
@@ -93,7 +93,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 
 ## 安装与运行
 
-### 方式一：安装包（v0.2.0 起）
+### 方式一：安装包（v0.2.0+）
 
 从 [Releases](https://github.com/MiG144/dsh-win7/releases) 下载：
 
@@ -170,7 +170,7 @@ dsh-win7/
 | 版本 | 内容 |
 | --- | --- |
 | `v0.1.0` | 外壳（已发布） |
-| `v0.2.0` | 单机安装包：启动器 + Node 22 + Host |
+| `v0.2.0` | 单机安装包：外壳内置 Node 22 + Host ✅ 已发布 |
 | `v0.3.0` | 终端（winpty）、图片附件 |
 | `v0.4.0+` | Office 技能（Python 3.8 运行时）、语音 |
 
