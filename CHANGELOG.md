@@ -34,8 +34,8 @@
 
 ### Verified
 - **Phase 0**：Node 22.23.3 + 官方 DSH Host 在 Win7 SP1 x64 **本机**运行，
-  外壳连 `127.0.0.1:3080` 正常进入界面，零源码改动。详见 `docs/PHASE0.md`
-- **Phase 1**：自包含便携包在 Win7 单机启动成功，单个 exe 拉起 Host 并加载界面。详见 `docs/PHASE1.md`
+  外壳连 `127.0.0.1:3080` 正常进入界面，零源码改动。详见 `docs/VERIFICATION.md`
+- **Phase 1**：自包含便携包在 Win7 单机启动成功，单个 exe 拉起 Host 并加载界面。详见 `docs/VERIFICATION.md`
 
 ## [0.1.0] - 2026-10-20
 

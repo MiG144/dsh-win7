@@ -92,8 +92,7 @@ The docs are written in Chinese. Entry points:
 
 | Document | Content |
 | --- | --- |
-| [docs/PHASE0.md](docs/PHASE0.md) · [docs/PHASE1.md](docs/PHASE1.md) | Win7 verification records |
-| [docs/FEASIBILITY.md](docs/FEASIBILITY.md) | Why this stack |
+| [docs/VERIFICATION.md](docs/VERIFICATION.md) | Test results on a real Windows 7 machine |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Process model and auth |
 | [docs/BUILD.md](docs/BUILD.md) | Packaging, CI, offline distribution |
 | [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) | Patches and feature matrix |
@@ -101,8 +100,7 @@ The docs are written in Chinese. Entry points:
 
 ## Contributing
 
-Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and the
-[Code of Conduct](CODE_OF_CONDUCT.md) first.
+Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
 ## License
 

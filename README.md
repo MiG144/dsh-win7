@@ -88,8 +88,7 @@ flowchart LR
 
 | 文档 | 内容 |
 | --- | --- |
-| [Phase 0](docs/PHASE0.md) · [Phase 1](docs/PHASE1.md) | Win7 实机验证记录 |
-| [可行性报告](docs/FEASIBILITY.md) | 技术选型论证 |
+| [验证记录](docs/VERIFICATION.md) | 真实 Win7 上的测试结果 |
 | [架构](docs/ARCHITECTURE.md) | 进程模型、鉴权、目录布局 |
 | [构建](docs/BUILD.md) | 打包、CI、离线分发 |
 | [兼容性](docs/COMPATIBILITY.md) | 系统补丁、功能矩阵 |
@@ -97,7 +96,7 @@ flowchart LR
 
 ## 参与
 
-欢迎 Issue 与 PR。提交前请阅读 [贡献指南](CONTRIBUTING.md) 与 [行为准则](CODE_OF_CONDUCT.md)。
+欢迎 Issue 与 PR。提交前请阅读 [贡献指南](CONTRIBUTING.md)。
 
 ## 许可
 
