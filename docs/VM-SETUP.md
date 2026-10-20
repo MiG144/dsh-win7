@@ -1,5 +1,7 @@
 # Win7 虚拟机验证 · 操作清单
 
+> 状态：维护中 · 最后更新：2026-10-20
+
 > 目标：在这台 Win11 上用虚拟机验证「DSH Win7 外壳」能不能在 Windows 7 上启动、连上 Host、正常对话。
 > 预计总耗时：1 小时左右（装系统 30–45 分钟，其余 20 分钟）。
 
@@ -178,6 +180,8 @@ VirtualBox → 选中 VM → **Snapshots** → **Take**：
 
 ```powershell
 # 关机后删除虚拟机（保留 ISO 和 zip）
+
+> 状态：维护中 · 最后更新：2026-10-20
 & "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" unregistervm "DSH-Win7" --delete
 ```
 

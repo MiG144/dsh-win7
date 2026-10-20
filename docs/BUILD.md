@@ -1,5 +1,7 @@
 # 构建
 
+> 状态：维护中 · 最后更新：2026-10-20
+
 ## 前置
 
 | 项 | 版本 |
@@ -54,7 +56,11 @@ node node_modules\electron\install.js
 
 ```powershell
 # 1. 改版本号（apps/shell/package.json、CHANGELOG.md）
+
+> 状态：维护中 · 最后更新：2026-10-20
 # 2. 提交并打标签
+
+> 状态：维护中 · 最后更新：2026-10-20
 git commit -am "release: v0.1.1"
 git tag v0.1.1
 git push origin main --tags

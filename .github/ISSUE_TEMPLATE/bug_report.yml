@@ -1,0 +1,65 @@
+name: Bug 报告
+description: 外壳、Host 启动、安装包或兼容性问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。提交前请先搜索已有 Issue。
+        安全漏洞请**不要**公开提交，见 [SECURITY.md](../SECURITY.md)。
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 安装包版本或 commit（`git rev-parse --short HEAD`）
+      placeholder: v0.1.0 / ae2faa0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 运行环境
+      options:
+        - Windows 7 SP1 x64（实机）
+        - Windows 7 SP1 x64（虚拟机）
+        - Windows 10/11
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 现象
+      description: 发生了什么？期望是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 双击 ...
+        2. 配置 ...
+        3. 看到 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或截图
+      description: 外壳控制台、`C:\DSH\host.log`、Electron 的 DevTools 报错
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 自查
+      options:
+        - label: 已确认不是 Host 未启动 / token 过期导致
+        - label: 已核对安装包的 SHA256

@@ -1,0 +1,45 @@
+name: 功能建议
+description: 新能力、兼容性改进或体验优化
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先阅读 [路线图](../README.md#路线图) 与 [项目计划](../docs/PLAN.md)，
+        避免与已完成/已排期的条目重复。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 想解决什么问题
+      description: 描述场景，而不是直接给方案
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 设想的方案
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 涉及模块
+      options:
+        - 外壳（Electron 22）
+        - 启动器 / 安装包
+        - Host 运行时（Node 22）
+        - Chromium 108 兼容层
+        - 文档
+        - 其他
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: 约束确认
+      options:
+        - label: 方案不要求 Electron 23+ 或 Node 18+ 的独占能力
+        - label: 方案不需要修改上游 DSH 源码（如需，请说明理由）
