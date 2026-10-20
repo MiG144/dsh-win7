@@ -46,7 +46,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 | Host 代码 | 官方 `@deepseek-ai/dsh` 产物 | **零源码改动**，跟随上游 |
 | 图形界面 | DSH 官方 Web UI | 不分叉 |
 | 通信 | `127.0.0.1:3080` 同机回环 | 单机，不出网 |
-| 模型出口 | 任意 OpenAI 兼容 API | 内网/公网均可 |
+| 模型出口 | 任意 OpenAI 兼容 API | 内网，或经代理/防火墙控制的公网出口 |
 
 ## 状态
 
@@ -83,7 +83,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 │                                                            │
 └──────────────────────────┬─────────────────────────────────┘
                            │ HTTPS
-                  OpenAI 兼容 API（内网/公网）
+                  OpenAI 兼容 API（内网或受控出口）
 ```
 
 启动器负责拉起 Host、等待端口就绪、启动外壳，并在退出时统一回收进程。
@@ -98,7 +98,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 - `DSH-Win7-<version>-setup.exe` —— 安装版
 - `DSH-Win7-<version>-portable.exe` —— 便携版
 
-下载后请核对 `SHA256SUMS.txt`。安装包**未签名**，Windows 会提示"未知发布者"。
+下载后应核对 `SHA256SUMS.txt`。安装包**未签名**，Windows 会提示"未知发布者"。
 
 ### 方式二：只跑外壳（v0.1.0，连接外部 Host）
 
@@ -173,11 +173,12 @@ dsh-win7/
 
 ## 已知限制
 
-- **未签名**：安装包无代码签名，SmartScreen 会拦截；请核对 SHA256。
+- **未签名**：安装包无代码签名，SmartScreen 会拦截；应核对 SHA256。
 - **终端不可用**：`node-pty` 的 ConPTY 只支持 Win10 1809+，需换 winpty 后端。
 - **Office 技能不可用**：官方依赖 Python 3.12 + numpy2/pandas3，Win7 需降级到 Python 3.8。
 - **Chromium 108**：少数新 CSS 特性降级（不影响功能），详见兼容性文档。
-- **Win7 已停止安全更新**：请把该机器限制在受控内网。
+- **Win7 已停止安全更新**：本项目的预期部署环境是**受控网络**——内网，或经代理/防火墙
+  限制出口的网络。Host 端口不应直接暴露到公网；确需访问公网模型 API 时，由代理或防火墙控制出口。
 
 ## 贡献
 

@@ -167,7 +167,7 @@ dsh web --host 192.168.1.20 --port 3080
 
 - 端口固定后，把 `?token=` 里的 token 交给 Win7 端做首次换取；cookie 生效后
   可以把配置里的 token 清空。
-- 需要跨公网时，**不要**直接把 3080 暴露到公网：用 WireGuard/Tailscale/SSH 隧道，
+- 需要跨公网时，3080 **不应**直接暴露到公网：使用 WireGuard/Tailscale/SSH 隧道，
   或前置 Nginx/Caddy 做 TLS + Basic Auth（DSH 自身 TLS 只负责加密，不做客户端认证）。
 - 文件类工具（读写、终端、Office）执行在 Host 机器上，Win7 端看到的是 Host 的文件系统。
   需要 Win7 本地文件时，把对应目录做成 SMB 共享挂到 Host，或在 Host 上开工作区。
@@ -266,9 +266,9 @@ CSS 兜底（可选，影响观感不影响功能）：
 
 ### 4.6 安全注意
 
-- token 只用于首次换 cookie；**不要把带 token 的 URL 发到群里/工单里**。cookie 泄露 = 完整 Host 权限。
-- Host 暴露到局域网时，DSH 只做 Host/Origin 校验、不做用户体系；非信任网络必须加隧道或反代鉴权。
-- Win7 上的 Chromium 108 不再有安全更新；这个壳只应加载你自己的 Host，不要当通用浏览器用。
+- token 只用于首次换 cookie；**带 token 的 URL 不应出现在群聊或工单里**。cookie 泄露 = 完整 Host 权限。
+- Host 暴露到局域网时，DSH 只做 Host/Origin 校验、不做用户体系；非信任网络需要加隧道或反代鉴权。
+- Win7 上的 Chromium 108 不再有安全更新；该外壳只应加载你自己的 Host，不应当作通用浏览器使用。
 - 分叉/内部分发注意商标：仓库是 MIT，但 "DeepSeek Harness" 品牌与官方服务不在许可范围内，内部使用建议换名换图标。
 
 ---
