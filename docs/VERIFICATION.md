@@ -31,7 +31,7 @@
 | `koffi` | ✅ | — | Windows API 调用可用 |
 | `node-addon-require-builtin` | ✅ | — | 可用 |
 
-> `sharp` 只验证了模块层面的图像处理；UI 里的贴图交互未逐项点测。
+> UI 验证：把测试图片拖进输入框，缩略图正常出现，无报错。
 ## 不可用或未验证
 
 - **终端、Office 技能**：依赖 Win10 的 ConPTY 与 Python 3.12，当前不可用（见 [兼容性](COMPATIBILITY.md)）

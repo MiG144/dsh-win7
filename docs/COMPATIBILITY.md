@@ -39,7 +39,7 @@ SHA-1 `7cc76b0015220de956328fb934d61b710a94293d`。
 | 终端 | ❌ 不可用 | 实测 `pty.spawn` 报 `Cannot launch conpty` |
 | Office 技能 | ❌ 未支持 | 需 Python 3.8 降级运行时 |
 | 语音输入 | ❌ 不可用 | `sherpa-onnx-win-x64` 加载报「找不到指定的程序」 |
-| 图片附件 | ✅ 可用 | `sharp` 加载与图像编码均通过 |
+| 图片附件 | ✅ 可用 | `sharp` 加载与编码通过；拖拽上传并显示缩略图 |
 | 自动更新 | ❌ 不做 | 无签名、无稳定 feed |
 
 ## Chromium 108 的差异

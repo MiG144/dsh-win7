@@ -75,7 +75,7 @@ model calls and tool execution.
 | Workspace | File read/write, syntax highlighting, Markdown preview |
 | Models | Any OpenAI-compatible API, intranet or public |
 | Desktop | Tray, single instance, window state, reconnect |
-| Image attachments | Paste and attach images (`sharp` verified on Win7) |
+| Image attachments | Drag and attach images (verified on Win7) |
 | Update check | Automatic on launch; manual via Help → Check for updates |
 | Launch at login | Toggle in the app menu (Windows login item) |
 
