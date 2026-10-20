@@ -1,7 +1,6 @@
 {
-  "url": "http://192.168.1.20:3080/",
-  "token": "",
+  "url": "auto",
   "closeToTray": true,
-  "gpu": "auto",
+  "gpu": "software",
   "zoom": 1
 }

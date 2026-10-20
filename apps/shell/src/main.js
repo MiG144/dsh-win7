@@ -13,6 +13,7 @@
 const { app, BrowserWindow, Menu, Tray, dialog, nativeImage, session, shell } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
+const { LocalHost } = require('./host');
 
 const APP_NAME = 'DeepSeek Harness';
 const DEFAULT_BACKGROUND = '#0f1115';
@@ -29,13 +30,16 @@ function trace(message) {
   }
 }
 
-/** @type {{url: string, token?: string, closeToTray: boolean, gpu: 'auto'|'software', zoom: number}} */
+/** @type {{url: string, port: number, token?: string, closeToTray: boolean, gpu: 'auto'|'software', zoom: number}} */
 let config = {
-  url: 'http://127.0.0.1:3000/',
+  url: 'auto', // 'auto' = spawn the bundled local Host; any http(s) URL = remote mode
+  port: 0, // 0 = pick a free port
   closeToTray: true,
   gpu: 'auto',
   zoom: 1,
 };
+
+let localHost = null;
 
 let mainWindow = null;
 let tray = null;
@@ -65,7 +69,7 @@ function loadConfig() {
       }
       if (candidate.file && fs.existsSync(candidate.file)) {
         const parsed = JSON.parse(fs.readFileSync(candidate.file, 'utf8'));
-        if (typeof parsed.url !== 'string' || parsed.url.length === 0) continue;
+        if (parsed.url !== undefined && (typeof parsed.url !== 'string' || parsed.url.length === 0)) continue;
         config = { ...config, ...parsed };
         return;
       }
@@ -220,8 +224,6 @@ function createWindow() {
     },
   });
 
-  const target = withToken(config.url);
-
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     if (config.zoom && config.zoom !== 1) mainWindow.webContents.setZoomFactor(config.zoom);
@@ -245,9 +247,10 @@ function createWindow() {
   });
 
   mainWindow.webContents.on('will-navigate', (event, url) => {
-    const allowed = withToken(config.url);
+    const baseUrl = allowedOrigin();
+    if (!baseUrl) return;
     const same = new URL(url);
-    const base = new URL(allowed);
+    const base = new URL(baseUrl);
     if (same.origin !== base.origin) {
       event.preventDefault();
       if (/^https?:/i.test(url)) shell.openExternal(url);
@@ -266,10 +269,74 @@ function createWindow() {
     mainWindow = null;
   });
 
-  trace('loadURL ' + target);
-  mainWindow.loadURL(target);
+  mainWindow.loadURL(startingPage());
 
-  if (SMOKE) runSmoke(target);
+  void boot();
+}
+
+function startingPage() {
+  const html = `<!doctype html><meta charset="utf-8"><style>
+  html,body{height:100%;margin:0;background:${DEFAULT_BACKGROUND};color:#e5e7eb;
+    font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
+  main{text-align:center;color:#9ca3af}
+  .dot{display:inline-block;width:8px;height:8px;margin:0 3px;border-radius:50%;background:#4d6bfe;animation:b 1s infinite}
+  .dot:nth-child(2){animation-delay:.2s}
+  .dot:nth-child(3){animation-delay:.4s}
+  @keyframes b{0%,100%{opacity:.2}50%{opacity:1}}
+  </style><main><p>正在启动 DeepSeek Harness…</p>
+  <p><span class="dot"></span><span class="dot"></span><span class="dot"></span></p></main>`;
+  return 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+}
+
+/** Origin the window is allowed to stay on; null while the local host is still starting. */
+function allowedOrigin() {
+  const url = (config.url || '').trim();
+  if (url && url !== 'auto') {
+    try {
+      return withToken(url);
+    } catch {
+      return null;
+    }
+  }
+  return localHost ? `${localHost.origin}/` : null;
+}
+
+async function resolveTarget() {
+  const url = (config.url || '').trim();
+  if (url && url !== 'auto') return withToken(url);
+
+  localHost = new LocalHost({
+    app,
+    port: config.port || 0,
+    onState: (state, detail) => {
+      trace(`host ${state} ${detail || ''}`);
+      if (!mainWindow || mainWindow.isDestroyed()) return;
+      if (state === 'recovered') mainWindow.loadURL(localHost.entryUrl());
+      if (state === 'failed') mainWindow.loadURL(errorPage(localHost.origin, detail || 'Host 异常退出'));
+    },
+  });
+
+  const { origin, token } = await localHost.start();
+  config.url = origin;
+  return token ? `${origin}/?token=${token}` : `${origin}/`;
+}
+
+async function boot() {
+  try {
+    const target = await resolveTarget();
+    trace('loadURL ' + target);
+    if (mainWindow && !mainWindow.isDestroyed()) mainWindow.loadURL(target);
+    if (SMOKE) runSmoke(target);
+  } catch (error) {
+    console.error('boot failed', error);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      mainWindow.loadURL(errorPage((config.url && config.url !== 'auto') ? config.url : 'local host', error.message));
+    }
+    if (SMOKE) {
+      console.log('SMOKE_RESULT ' + JSON.stringify({ ok: false, error: error.message }));
+      app.exit(1);
+    }
+  }
 }
 
 async function runSmoke(target) {
@@ -294,6 +361,7 @@ async function runSmoke(target) {
   }
   console.log('SMOKE_RESULT ' + JSON.stringify(result));
   quitting = true;
+  localHost?.stop();
   app.exit(result.ok ? 0 : 1);
 }
 
@@ -319,13 +387,18 @@ trace('config ' + JSON.stringify(config));
 if (config.gpu === 'software') app.disableHardwareAcceleration();
 
 if (ensureSingleInstance()) {
-  app.setAppUserModelId('com.deepseek.dsh.win7shell');
+  app.setAppUserModelId('io.github.dshwin7.shell');
   app.whenReady().then(() => {
     trace('app ready');
     // Microphone permission is granted only to the configured Host origin.
     session.defaultSession.setPermissionRequestHandler((contents, permission, callback) => {
       try {
-        const origin = new URL(withToken(config.url)).origin;
+        const base = allowedOrigin();
+        if (!base) {
+          callback(false);
+          return;
+        }
+        const origin = new URL(base).origin;
         callback(permission === 'media' && contents.getURL().startsWith(origin));
       } catch {
         callback(false);
@@ -339,6 +412,6 @@ if (ensureSingleInstance()) {
     });
   });
 
-  app.on('before-quit', () => { quitting = true; });
+  app.on('before-quit', () => { quitting = true; localHost?.stop(); });
   app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
 }

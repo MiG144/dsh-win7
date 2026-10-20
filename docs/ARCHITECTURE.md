@@ -14,9 +14,9 @@
 ## 进程模型
 
 ```
-DSH-Win7.exe (launcher)
-├─ node.exe  host\bin.js web --host 127.0.0.1 --port 3080   [隐藏窗口]
-└─ DSH-Win7.exe (Electron)  ──HTTP/WS──► 127.0.0.1:3080
+DSH-Win7.exe (Electron 外壳，主进程内置 LocalHost 管理器)
+└─ node.exe  host\dsh\...\lib\bin.js web --host 127.0.0.1:<port> --no-open
+     └──HTTP/WS──► 127.0.0.1:<port>
 ```
 
 - Host 与壳生命周期绑定：壳退出 → 杀 Host；Host 崩溃 → 启动器重启（指数退避）。

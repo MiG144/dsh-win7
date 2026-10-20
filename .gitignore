@@ -20,3 +20,5 @@ apps/shell/shell.config.json
 Thumbs.db
 .vscode/
 .idea/
+
+vendor/

@@ -8,6 +8,11 @@
 - **Phase 0 通过**：Node 22.23.3（社区 Win7 构建）+ 官方 DSH Host 在 Win7 SP1 x64
   **本机**运行，外壳连 `127.0.0.1:3080` 正常进入界面，零源码改动。详见 `docs/PHASE0.md`。
 
+### Added
+- 外壳内置本地 Host 管理：src/host.js 负责启动/守候/重启 Node 22 Host，自动抓取 token 并加载页面
+- scripts/prepare-vendor.ps1 与 scripts/extract-host.js：准备 endor\{node,host} 供打包
+- electron-builder 配置改为 JS，endor 存在时才打入安装包
+
 ### Planned
 - 启动器：拉起 Host、等待端口、统一退出、崩溃重启
 - 单机安装包：内置 Node 22 + DSH Host

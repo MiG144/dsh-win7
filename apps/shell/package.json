@@ -14,52 +14,11 @@
   "scripts": {
     "start": "electron .",
     "smoke": "electron . --smoke",
-    "dist": "electron-builder --win --x64 --publish never",
-    "dist:dir": "electron-builder --win --x64 --dir"
+    "dist": "electron-builder --config electron-builder.config.js --win --x64 --publish never",
+    "dist:dir": "electron-builder --config electron-builder.config.js --win --x64 --dir"
   },
   "devDependencies": {
     "electron": "22.3.27",
     "electron-builder": "24.13.3"
-  },
-  "build": {
-    "appId": "io.github.dshwin7.shell",
-    "productName": "DSH Win7",
-    "directories": {
-      "output": "dist",
-      "buildResources": "assets"
-    },
-    "files": [
-      "src/**/*",
-      "assets/tray.png",
-      "assets/icon.ico",
-      "package.json"
-    ],
-    "win": {
-      "icon": "assets/icon.ico",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": false,
-      "artifactName": "DSH-Win7-${version}-setup.${ext}"
-    },
-    "portable": {
-      "artifactName": "DSH-Win7-${version}-portable.${ext}"
-    }
   }
 }

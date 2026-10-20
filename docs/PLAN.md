@@ -196,4 +196,5 @@ Phase 0 结束时必须明确回答，并记录到本文件：
 | Win7 上外壳 + 远程 Host 端到端验证 | ✅ 完成（见 [FEASIBILITY.md](FEASIBILITY.md) §2.3） |
 | Phase 0：Node 22 + DSH Host 在 Win7 本机运行 | ✅ **通过**（见 [PHASE0.md](PHASE0.md)） |
 | GitHub 仓库 / CI / Release | ✅ 已上线，`v0.1.0` 自动出包 |
-| Phase 1（启动器 + 单机安装包） | ⏳ 下一步 |
+| Phase 1：外壳自行拉起本地 Host | ✅ 完成（`src/host.js`） |
+| Phase 1：单机安装包 + 配置向导 | ⏳ 进行中 |
