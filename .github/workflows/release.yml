@@ -87,8 +87,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            apps/shell/dist/DSH-Win7-*-setup.exe
-            apps/shell/dist/DSH-Win7-*-portable.exe
+            apps/shell/dist/Harness7-*-setup.exe
+            apps/shell/dist/Harness7-*-portable.exe
             apps/shell/dist/SHA256SUMS.txt
           generate_release_notes: true
           fail_on_unmatched_files: false
