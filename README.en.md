@@ -19,7 +19,7 @@
 > Windows 7 runtime for it: the installer bundles the Node runtime and the official components,
 > so no additional setup is required.
 
-![Harness7 running on Windows 7](docs/assets/win7-dsh-running.png)
+![Harness7 running on Windows 7](docs/assets/win7-first-run.png)
 
 ## Features
 

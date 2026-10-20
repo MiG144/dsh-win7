@@ -17,7 +17,7 @@
 | 单机自包含安装 | ✅ | 安装包内置运行时与 Host，启动时自动拉起 |
 | 控制台错误 | 0 | — |
 
-![Harness7 在 Windows 7 上运行](assets/win7-dsh-running.png)
+![Harness7 在 Windows 7 上运行](assets/win7-first-run.png)
 
 ## 不可用或未验证
 

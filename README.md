@@ -18,7 +18,7 @@
 > DeepSeek Harness 官方版本仅支持 Windows 10 及以上。Harness7 为其提供 Windows 7 运行环境：
 > 安装包包含 Node 运行时与官方组件，安装后即可使用，无需额外配置。
 
-![Harness7 在 Windows 7 上运行](docs/assets/win7-dsh-running.png)
+![Harness7 在 Windows 7 上运行](docs/assets/win7-first-run.png)
 
 ## 特性
 
