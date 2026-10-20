@@ -13,6 +13,8 @@
 - scripts/prepare-vendor.ps1 与 scripts/extract-host.js：准备 endor\{node,host} 供打包
 - electron-builder 配置改为 JS，endor 存在时才打入安装包
 
+- **Phase 1**：自包含便携包（外壳 + Node 22 + Host）在 Win7 启动成功，单 exe 拉起 Host 并加载界面。
+
 ### Planned
 - 启动器：拉起 Host、等待端口、统一退出、崩溃重启
 - 单机安装包：内置 Node 22 + DSH Host

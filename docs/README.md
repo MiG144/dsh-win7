@@ -4,6 +4,7 @@
 | --- | --- | --- |
 | [PLAN.md](PLAN.md) | 阶段计划、验收标准、风险、ADR、时间表 | 想知道"接下来做什么" |
 | [PHASE0.md](PHASE0.md) | Phase 0 实测：Win7 本机跑 Node 22 + Host | 想复现单机运行 |
+| [PHASE1.md](PHASE1.md) | 自包含便携包的构建与 Win7 验证 | 想自己打包分发 |
 | [FEASIBILITY.md](FEASIBILITY.md) | 技术选型论证 + Win7 实测数据（含截图） | 想了解"为什么这样选" |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | 进程模型、鉴权、目录布局、Chromium 108 兼容层 | 要改代码的人 |
 | [BUILD.md](BUILD.md) | 本地构建、CI、离线打包、代码签名 | 要出安装包的人 |

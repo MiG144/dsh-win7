@@ -57,7 +57,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 | — | Electron 22 外壳在真实 Win7 上运行 | ✅ 已验证 |
 | — | 外壳连远端 Host：登录/中文/托盘/断连恢复/免 token 重启 | ✅ 已验证 |
 | **Phase 0** | Node 22 + 官方 DSH Host 在 **Win7 本机**跑通 | ✅ **通过**（[记录](docs/PHASE0.md)） |
-| **Phase 1** | 外壳自行拉起本地 Host（已完成）；单机安装包与配置向导（进行中） | 🔧 进行中 |
+| **Phase 1** | 单机自包含便携包（外壳 + Node 22 + Host）已在 Win7 启动成功；安装包与向导进行中 | 🔧 进行中 |
 | Phase 2 | 终端、Office、语音等能力迁移 | 📋 计划中 |
 
 发布：`v0.1.0` 只含外壳（需外部 Host）；`v0.2.0` 起提供**单机安装包**。
@@ -157,6 +157,7 @@ dsh-win7/
 | --- | --- |
 | [项目计划](docs/PLAN.md) | 阶段、里程碑、验收标准、风险、ADR |
 | [Phase 0 记录](docs/PHASE0.md) | Win7 本机跑通 Node 22 + Host 的完整过程与踩坑 |
+| [Phase 1 记录](docs/PHASE1.md) | 自包含便携包（外壳+运行时+Host）的构建与 Win7 验证 |
 | [可行性报告](docs/FEASIBILITY.md) | 为什么不能直接装官方版、Win7 实测数据 |
 | [架构](docs/ARCHITECTURE.md) | 进程模型、鉴权、目录布局、兼容层 |
 | [构建](docs/BUILD.md) | 本地构建、CI、离线打包、签名 |

@@ -197,4 +197,5 @@ Phase 0 结束时必须明确回答，并记录到本文件：
 | Phase 0：Node 22 + DSH Host 在 Win7 本机运行 | ✅ **通过**（见 [PHASE0.md](PHASE0.md)） |
 | GitHub 仓库 / CI / Release | ✅ 已上线，`v0.1.0` 自动出包 |
 | Phase 1：外壳自行拉起本地 Host | ✅ 完成（`src/host.js`） |
-| Phase 1：单机安装包 + 配置向导 | ⏳ 进行中 |
+| Phase 1：自包含便携包在 Win7 验证 | ✅ 完成（[PHASE1.md](PHASE1.md)） |
+| Phase 1：NSIS 安装包 + 配置向导 | ⏳ 进行中 |
