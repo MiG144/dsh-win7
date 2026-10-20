@@ -18,7 +18,7 @@
 > Harness7 让已经停止支持的 Windows 7 仍然可以使用 DeepSeek Harness。
 > 它把 Electron 22 外壳、Node 22 运行时和官方 Harness 包打成一个安装包，双击即用，不需要第二台机器。
 
-![Harness7 在 Windows 7 上运行](docs/assets/win7-phase1-selfcontained.png)
+![Harness7 在 Windows 7 上运行](docs/assets/win7-dsh-running.png)
 
 ## 特性
 

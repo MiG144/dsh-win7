@@ -19,7 +19,7 @@
 > a Node 22 runtime and the official Harness package into a single installer — double-click
 > and go, no second machine required.
 
-![Harness7 running on Windows 7](docs/assets/win7-phase1-selfcontained.png)
+![Harness7 running on Windows 7](docs/assets/win7-dsh-running.png)
 
 ## Features
 
