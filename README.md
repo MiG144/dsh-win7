@@ -4,7 +4,7 @@
 
 # Harness7
 
-**在 Windows 7 SP1 x64 上运行 DeepSeek Harness 的非官方外壳**
+**让 DeepSeek Harness 在 Windows 7 SP1 x64 上运行**
 
 [![CI](https://github.com/MiG144/dsh-win7/actions/workflows/ci.yml/badge.svg)](https://github.com/MiG144/dsh-win7/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/MiG144/dsh-win7)](https://github.com/MiG144/dsh-win7/releases)
