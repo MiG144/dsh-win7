@@ -5,3 +5,6 @@ shell-trace.log
 out.txt
 smoke*.png
 vendor/
+err.txt
+out.txt
+*.png

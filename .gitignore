@@ -22,3 +22,5 @@ Thumbs.db
 .idea/
 
 vendor/
+apps/shell/*.png
+apps/shell/err.txt
