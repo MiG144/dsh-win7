@@ -58,16 +58,14 @@ New-Item -ItemType Directory -Force -Path $vendor | Out-Null
 New-LinkOrCopy $nodeRoot $nodeTarget
 
 # --- Host tree --------------------------------------------------------------
+# Layout A: a directory containing `dsh\` (extracted desktop bundle)
+# Layout B: a package root containing `node_modules\@deepseek-ai\dsh` (npm install)
 if ($HostDir) {
-  $hostSrc = Resolve-Path $HostDir
-  # Accept either a dir that already contains dsh\, or the dsh\ dir itself.
-  if (Test-Path (Join-Path $hostSrc 'dsh')) {
+  $hostSrc = (Resolve-Path $HostDir).Path
+  if ((Test-Path (Join-Path $hostSrc 'dsh')) -or (Test-Path (Join-Path $hostSrc 'node_modules\@deepseek-ai\dsh'))) {
     New-LinkOrCopy $hostSrc $hostTarget
-  } elseif (Test-Path (Join-Path $hostSrc 'node_modules\@deepseek-ai\dsh')) {
-    New-Item -ItemType Directory -Force -Path $hostTarget | Out-Null
-    New-LinkOrCopy $hostSrc (Join-Path $hostTarget 'dsh')
   } else {
-    throw "host tree not recognised: $hostSrc"
+    throw "host tree not recognised (expected dsh\ or node_modules\@deepseek-ai\dsh): $hostSrc"
   }
 } elseif ($AsarPath) {
   New-Item -ItemType Directory -Force -Path $hostTarget | Out-Null
@@ -78,9 +76,14 @@ if ($HostDir) {
 
 # --- Verify -----------------------------------------------------------------
 $nodeExe = Join-Path $nodeTarget 'node.exe'
-$binJs = Join-Path $hostTarget 'dsh\node_modules\@deepseek-ai\dsh\lib\bin.js'
 if (-not (Test-Path $nodeExe)) { throw "missing: $nodeExe" }
-if (-not (Test-Path $binJs)) { throw "missing: $binJs" }
+
+$binCandidates = @(
+  (Join-Path $hostTarget 'dsh\node_modules\@deepseek-ai\dsh\lib\bin.js'),
+  (Join-Path $hostTarget 'node_modules\@deepseek-ai\dsh\lib\bin.js')
+)
+$binJs = $binCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $binJs) { throw "host bin.js not found under $hostTarget" }
 
 $nodeVersion = & $nodeExe -v
 $sizeMb = [math]::Round(((Get-ChildItem $hostTarget -Recurse -File | Measure-Object Length -Sum).Sum) / 1MB, 1)

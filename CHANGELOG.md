@@ -2,23 +2,22 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [Unreleased]
+## [0.2.0] - 2026-10-20
 
-### Verified
-- **Phase 0 通过**：Node 22.23.3（社区 Win7 构建）+ 官方 DSH Host 在 Win7 SP1 x64
-  **本机**运行，外壳连 `127.0.0.1:3080` 正常进入界面，零源码改动。详见 `docs/PHASE0.md`。
+单机自包含版本：外壳自带 Node 22 运行时与 DSH Host，不再需要外部 Host。
 
 ### Added
-- 外壳内置本地 Host 管理：src/host.js 负责启动/守候/重启 Node 22 Host，自动抓取 token 并加载页面
-- scripts/prepare-vendor.ps1 与 scripts/extract-host.js：准备 endor\{node,host} 供打包
-- electron-builder 配置改为 JS，endor 存在时才打入安装包
+- `src/host.js`：外壳主进程内置 Host 管理——启动、等待端口、抓取 token、崩溃按指数退避重启、退出回收
+- 本地模式配置 `url: "auto"`：自动选择空闲端口并加载本机 Host
+- 启动占位页，以及 Host 日志（`%APPDATA%\dsh-win7-shell\host.log`）
+- `scripts/prepare-vendor.ps1`、`scripts/extract-host.js`：准备 `vendor\{node,host}`
+- electron-builder 配置改为 JS：`vendor` 存在时才把运行时打进安装包
+- Release 工作流：自动安装官方 Host、下载 Node 22 Win7 构建，产出单机安装包与便携版
 
-- **Phase 1**：自包含便携包（外壳 + Node 22 + Host）在 Win7 启动成功，单 exe 拉起 Host 并加载界面。
-
-### Planned
-- 启动器：拉起 Host、等待端口、统一退出、崩溃重启
-- 单机安装包：内置 Node 22 + DSH Host
-- 首次启动模型配置向导
+### Verified
+- **Phase 0**：Node 22.23.3 + 官方 DSH Host 在 Win7 SP1 x64 **本机**运行，
+  外壳连 `127.0.0.1:3080` 正常进入界面，零源码改动。详见 `docs/PHASE0.md`
+- **Phase 1**：自包含便携包在 Win7 单机启动成功，单个 exe 拉起 Host 并加载界面。详见 `docs/PHASE1.md`
 
 ## [0.1.0] - 2026-10-20
 

@@ -1,7 +1,7 @@
 {
   "name": "dsh-win7-shell",
   "productName": "DSH Win7",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Unofficial Electron 22 (Chromium 108) shell that runs the DeepSeek Harness web UI on Windows 7 SP1 x64.",
   "license": "MIT",

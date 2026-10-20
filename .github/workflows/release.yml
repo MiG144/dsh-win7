@@ -9,13 +9,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   release:
-    name: Build installer and publish
+    name: Build self-contained installer
     runs-on: windows-latest
     defaults:
       run:
         working-directory: apps/shell
+
     steps:
       - uses: actions/checkout@v4
 
@@ -25,10 +30,46 @@ jobs:
           cache: npm
           cache-dependency-path: apps/shell/package-lock.json
 
-      - name: Install dependencies
+      - name: Install shell dependencies
         run: npm ci
 
-      - name: Build NSIS installer and portable exe
+      # Host runtime: official npm packages, pinned. Reproducible and auditable.
+      - name: Install Harness host
+        working-directory: ${{ github.workspace }}
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path .ci/host | Out-Null
+          '{ "name": "host-vendor", "private": true }' | Set-Content .ci/host/package.json -Encoding utf8
+          npm install --prefix .ci/host --omit=dev --no-audit --no-fund @deepseek-ai/dsh@0.2.1-rc.2
+          if (-not (Test-Path .ci/host/node_modules/@deepseek-ai/dsh/lib/bin.js)) {
+            throw 'host package did not install correctly'
+          }
+
+      # Node runtime: community Windows 7 build (official Node 22 requires Win10).
+      - name: Fetch Node 22 for Windows 7
+        working-directory: ${{ github.workspace }}
+        shell: pwsh
+        run: |
+          $url = 'https://github.com/DeftKing/nodejs-win7/raw/main/node-22.23.3/node-v22.23.3-win-x64.7z'
+          Invoke-WebRequest -Uri $url -OutFile node22.7z
+          $sevenZip = @(
+            'C:\Program Files\7-Zip\7z.exe',
+            'C:\Program Files (x86)\7-Zip\7z.exe'
+          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $sevenZip) { $sevenZip = '7z' }
+          & $sevenZip x node22.7z -onode22 -y | Out-Null
+          $nodeExe = Get-ChildItem node22 -Recurse -Filter node.exe | Select-Object -First 1
+          if (-not $nodeExe) { throw 'node runtime extraction failed' }
+
+      - name: Prepare vendor (node + host)
+        working-directory: ${{ github.workspace }}
+        shell: pwsh
+        run: |
+          ./scripts/prepare-vendor.ps1 -NodeDir ./node22 -HostDir ./.ci/host
+          $bin = 'apps/shell/vendor/host/node_modules/@deepseek-ai/dsh/lib/bin.js'
+          if (-not (Test-Path $bin)) { throw "missing $bin" }
+
+      - name: Build installer and portable exe
         run: npm run dist
 
       - name: Generate SHA256SUMS
