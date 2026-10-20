@@ -10,6 +10,7 @@
 | [BUILD.md](BUILD.md) | 本地构建、CI、离线打包、代码签名 | 要出安装包的人 |
 | [COMPATIBILITY.md](COMPATIBILITY.md) | Win7 补丁基线、功能矩阵、已知问题 | 部署/排障 |
 | [VM-SETUP.md](VM-SETUP.md) | 用 VirtualBox 复现验证环境 | 没有 Win7 实机的人 |
+| [FAQ.md](FAQ.md) | 安装、网络、数据位置等常见问题 | 第一次使用 |
 | [BACKLOG.md](BACKLOG.md) | 计划中的工作（Logo、自启、离线验证等） | 想参与或了解排期 |
 
 ## 阅读顺序建议
