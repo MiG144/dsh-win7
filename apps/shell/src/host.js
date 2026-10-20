@@ -17,7 +17,12 @@ const fs = require('node:fs');
 const net = require('node:net');
 const path = require('node:path');
 
-const HOST_BIN = path.join('dsh', 'node_modules', '@deepseek-ai', 'dsh', 'lib', 'bin.js');
+const HOST_BINS = [
+  // layout A: extracted desktop bundle — vendor/host/dsh/node_modules/...
+  path.join('dsh', 'node_modules', '@deepseek-ai', 'dsh', 'lib', 'bin.js'),
+  // layout B: plain npm install — vendor/host/node_modules/@deepseek-ai/dsh/...
+  path.join('node_modules', '@deepseek-ai', 'dsh', 'lib', 'bin.js'),
+];
 const TOKEN_RE = /token=([A-Za-z0-9_-]+)/;
 const MAX_RESTARTS = 5;
 
@@ -32,7 +37,12 @@ function nodePath(app) {
 }
 
 function hostBinPath(app) {
-  return path.join(vendorRoot(app), 'host', HOST_BIN);
+  const root = path.join(vendorRoot(app), 'host');
+  for (const rel of HOST_BINS) {
+    const candidate = path.join(root, rel);
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return path.join(root, HOST_BINS[0]);
 }
 
 function delay(ms) {
