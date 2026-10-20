@@ -111,7 +111,7 @@ function saveWindowState() {
 function errorPage(url, reason) {
   const html = `<!doctype html><meta charset="utf-8"><style>
   html,body{height:100%;margin:0;background:${DEFAULT_BACKGROUND};color:#e5e7eb;
-    font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
+    font:14px/1.6 "Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
   main{max-width:560px;padding:32px}
   h1{font-size:18px;margin:0 0 12px}
   code{background:#1f2937;padding:2px 6px;border-radius:4px;word-break:break-all}
@@ -278,7 +278,7 @@ function createWindow() {
 function startingPage() {
   const html = `<!doctype html><meta charset="utf-8"><style>
   html,body{height:100%;margin:0;background:${DEFAULT_BACKGROUND};color:#e5e7eb;
-    font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
+    font:14px/1.6 "Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center}
   main{text-align:center;color:#9ca3af}
   .dot{display:inline-block;width:8px;height:8px;margin:0 3px;border-radius:50%;background:#4d6bfe;animation:b 1s infinite}
   .dot:nth-child(2){animation-delay:.2s}

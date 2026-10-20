@@ -1,20 +1,14 @@
-# Harness7 的第三方组件与商标说明
+# Harness7 的第三方组件说明
 
 本项目代码以 MIT 发布（见 [LICENSE](LICENSE)）。
-分发安装包时会一并包含下列第三方组件，它们各自保留原有许可证：
+安装包包含以下第三方组件，各自保留原有许可证：
 
 | 组件 | 版本 | 许可证 | 说明 |
 | --- | --- | --- | --- |
 | Electron | 22.3.27 | MIT | 桌面运行时（Chromium 108 / Node 16.17） |
-| Node.js（社区 Win7 构建） | 22.23.3 | MIT | Host 运行时，来源见 [DeftKing/nodejs-win7](https://github.com/DeftKing/nodejs-win7) |
-| DeepSeek Harness (`@deepseek-ai/*`) | 0.2.x | MIT | Host 与 Web UI，来自 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)，随包保留其原始 LICENSE |
+| Node.js | 22.23.3 | MIT | Host 运行时（社区 Win7 构建） |
+| DeepSeek Harness (`@deepseek-ai/*`) | 0.2.x | MIT | Host 与 Web UI，随包保留其原始 LICENSE |
 | electron-builder 生成物 | — | MIT | NSIS 安装器框架 |
-
-**不随本项目分发**（需用户自行安装，仓库内不包含）：
-
-- Microsoft YaHei / SimSun 等中文字体——版权归微软，不可再分发；
-- 小狼毫 Rime（GPL-3.0）——用户自行从 [rime.im](https://rime.im/download/) 安装；
-- Windows 7 安装镜像——版权归微软。
 
 ## 名称与图标
 

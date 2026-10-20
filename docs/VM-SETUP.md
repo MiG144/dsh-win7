@@ -88,7 +88,7 @@ New-SmbShare -Name dsh -Path <repo> -ReadAccess Everyone
 
 英文版 Win7 没有中日韩字体，DSH 界面是中文的，可能全是方块。三选一：
 
-- **最快**：把宿主机的 `msyh.ttc`、`msyhbd.ttc`、`simsun.ttc` 从 `C:\Windows\Fonts` 拷进虚拟机，右键 **Install**
+- **最快**：把宿主机的系统中文字体文件从 `C:\Windows\Fonts` 拷进虚拟机，右键 **Install**
 - **正规**：控制面板 → Region and Language → Keyboards and Languages → Install/uninstall languages → 装简体中文（要联网）
 - **偷懒**：DSH 设置里把界面语言切成 English
 
