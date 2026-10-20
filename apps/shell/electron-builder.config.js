@@ -49,6 +49,7 @@ module.exports = {
     allowToChangeInstallationDirectory: true,
     deleteAppDataOnUninstall: false,
     artifactName: 'Harness7-${version}-setup.${ext}',
+    runAfterFinish: true,
   },
   portable: {
     artifactName: 'Harness7-${version}-portable.${ext}',

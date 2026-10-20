@@ -75,6 +75,8 @@ model calls and tool execution.
 | Workspace | File read/write, syntax highlighting, Markdown preview |
 | Models | Any OpenAI-compatible API, intranet or public |
 | Desktop | Tray, single instance, window state, reconnect |
+| Update check | Automatic on launch; manual via Help → Check for updates |
+| Launch at login | Toggle in the app menu (Windows login item) |
 
 **Not supported yet**
 

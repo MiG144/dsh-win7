@@ -13,10 +13,13 @@
 const { app, BrowserWindow, Menu, Tray, dialog, nativeImage, session, shell } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
+const https = require('node:https');
 const { LocalHost } = require('./host');
 
 const APP_NAME = 'Harness7';
 const WINDOW_TITLE = 'Harness7 — DeepSeek Harness for Windows 7';
+const PROJECT_URL = 'https://github.com/MiG144/dsh-win7';
+const UPDATE_CHECK_INTERVAL = 24 * 60 * 60 * 1000;
 const DEFAULT_BACKGROUND = '#0f1115';
 const SMOKE = process.argv.includes('--smoke') || process.argv.some((arg) => arg.startsWith('--smoke='));
 const SMOKE_ARG = process.argv.find((arg) => arg.startsWith('--smoke='));
@@ -36,9 +39,12 @@ let config = {
   url: 'auto', // 'auto' = spawn the bundled local Host; any http(s) URL = remote mode
   port: 0, // 0 = pick a free port
   closeToTray: true,
+  autoStart: false,
   gpu: 'auto',
   zoom: 1,
 };
+
+let autoStartEnabled = false;
 
 let localHost = null;
 
@@ -126,12 +132,49 @@ function errorPage(url, reason) {
   return 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
 }
 
+function prefsFile() {
+  return path.join(app.getPath('userData'), 'preferences.json');
+}
+
+function readPrefs() {
+  try {
+    return JSON.parse(fs.readFileSync(prefsFile(), 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+function writePrefs(prefs) {
+  try {
+    fs.writeFileSync(prefsFile(), JSON.stringify(prefs, null, 2));
+  } catch {
+    /* ignore */
+  }
+}
+
+function applyAutoStart(enabled) {
+  autoStartEnabled = enabled;
+  try {
+    app.setLoginItemSettings({ openAtLogin: enabled, path: process.execPath });
+  } catch {
+    /* unsupported platform */
+  }
+}
+
+function toggleAutoStart(enabled) {
+  const prefs = readPrefs();
+  prefs.autoStart = enabled;
+  writePrefs(prefs);
+  applyAutoStart(enabled);
+}
+
 function buildMenu() {
   const template = [
     {
       label: '应用',
       submenu: [
         { label: '重新载入', accelerator: 'CmdOrCtrl+R', click: () => mainWindow?.webContents.reload() },
+        { label: '开机启动', type: 'checkbox', checked: autoStartEnabled, click: (item) => toggleAutoStart(item.checked) },
         { type: 'separator' },
         { label: '退出', accelerator: 'Alt+F4', click: () => { quitting = true; app.quit(); } },
       ],
@@ -151,6 +194,7 @@ function buildMenu() {
       label: '帮助',
       submenu: [
         { label: '复制当前地址', click: () => require('electron').clipboard.writeText(mainWindow?.webContents.getURL() ?? '') },
+        { label: '检查更新', click: () => { void checkForUpdates({ force: true }); } },
         { label: `关于 ${APP_NAME}`, click: () => showAbout() },
       ],
     },
@@ -174,6 +218,7 @@ function showAbout() {
       '',
       `Electron ${process.versions.electron} / Chromium ${process.versions.chrome}`,
       `本地服务：${config.url}`,
+      `项目地址：${PROJECT_URL}`,
       '',
       '本构建与 DeepSeek 无隶属关系。',
     ].join('\n'),
@@ -202,6 +247,86 @@ function maybeShowWelcome() {
         /* best effort */
       }
     });
+}
+
+function parseVersion(text) {
+  const match = String(text ?? '').trim().replace(/^v/i, '').match(/^(\d+)\.(\d+)\.(\d+)/);
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
+}
+
+function isNewerVersion(latest, current) {
+  const a = parseVersion(latest);
+  const b = parseVersion(current);
+  if (!a || !b) return false;
+  for (let i = 0; i < 3; i += 1) {
+    if (a[i] !== b[i]) return a[i] > b[i];
+  }
+  return false;
+}
+
+/** Latest release tag from the /releases/latest redirect, or null when offline. */
+function fetchLatestTag() {
+  return new Promise((resolve) => {
+    const request = https.get(
+      `${PROJECT_URL}/releases/latest`,
+      { headers: { 'User-Agent': `${APP_NAME}/${app.getVersion()}` }, timeout: 8000 },
+      (response) => {
+        response.resume();
+        const location = response.headers.location;
+        if (response.statusCode >= 300 && response.statusCode < 400 && location) {
+          const match = /\/tag\/([^/?#]+)/.exec(location);
+          resolve(match ? match[1] : null);
+          return;
+        }
+        resolve(null);
+      },
+    );
+    request.on('timeout', () => request.destroy());
+    request.on('error', () => resolve(null));
+  });
+}
+
+async function checkForUpdates({ force = false } = {}) {
+  if (SMOKE) return;
+  const stateFile = path.join(app.getPath('userData'), 'update-check.json');
+  let state = {};
+  try {
+    state = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
+  } catch {
+    /* first run */
+  }
+  if (!force && state.checkedAt && Date.now() - state.checkedAt < UPDATE_CHECK_INTERVAL) return;
+
+  const latest = await fetchLatestTag();
+  try {
+    fs.writeFileSync(stateFile, JSON.stringify({ checkedAt: Date.now(), latest }));
+  } catch {
+    /* ignore */
+  }
+
+  const current = app.getVersion();
+  if (latest && isNewerVersion(latest, current)) {
+    const { response } = await dialog.showMessageBox(mainWindow ?? undefined, {
+      type: 'info',
+      title: '发现新版本',
+      message: `Harness7 ${latest} 可用（当前 ${current}）`,
+      detail: `下载地址：${PROJECT_URL}/releases/latest`,
+      buttons: ['前往下载', '稍后'],
+      defaultId: 0,
+      cancelId: 1,
+      noLink: true,
+    });
+    if (response === 0) shell.openExternal(`${PROJECT_URL}/releases/latest`);
+  } else if (force) {
+    dialog.showMessageBox(mainWindow ?? undefined, {
+      type: 'info',
+      title: '检查更新',
+      message: '已是最新版本',
+      detail: `当前版本 ${current}`,
+      buttons: ['好'],
+      noLink: true,
+    });
+  }
 }
 
 function createTray() {
@@ -358,6 +483,7 @@ async function boot() {
     trace('loadURL ' + target);
     if (mainWindow && !mainWindow.isDestroyed()) mainWindow.loadURL(target);
     maybeShowWelcome();
+    setTimeout(() => { void checkForUpdates(); }, 12_000);
     if (SMOKE) runSmoke(target);
   } catch (error) {
     console.error('boot failed', error);
@@ -422,7 +548,9 @@ if (ensureSingleInstance()) {
   app.setAppUserModelId('io.github.dshwin7.shell');
   app.whenReady().then(() => {
     trace('app ready');
-    // Microphone permission is granted only to the configured Host origin.
+    const prefs = readPrefs();
+    applyAutoStart(prefs.autoStart === true || config.autoStart === true);
+    // Media (microphone) and notifications are granted only to the configured Host origin.
     session.defaultSession.setPermissionRequestHandler((contents, permission, callback) => {
       try {
         const base = allowedOrigin();
@@ -431,7 +559,8 @@ if (ensureSingleInstance()) {
           return;
         }
         const origin = new URL(base).origin;
-        callback(permission === 'media' && contents.getURL().startsWith(origin));
+        const allowedPermission = permission === 'media' || permission === 'notifications';
+        callback(allowedPermission && contents.getURL().startsWith(origin));
       } catch {
         callback(false);
       }
