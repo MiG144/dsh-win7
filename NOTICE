@@ -18,8 +18,5 @@
 
 ## 名称与图标
 
-- 项目的应用图标、托盘图标、安装器图标均为**自绘图形**，不包含任何上游标识或美术作品。
-- 项目名 **Harness7** 是自取的；文档中出现的 "DeepSeek Harness" 仅用于说明兼容对象。
-- 详细的名称使用原则与同类项目的通行做法，见 [TRADEMARKS.md](TRADEMARKS.md)。
-
-> MIT 许可证授予的是代码版权许可，不包含商标权。本项目不对 DeepSeek 的名称或标识主张任何权利。
+应用、托盘与安装器图标均为自绘；文档中的 "DeepSeek Harness" 仅用于说明兼容对象。
+详见 [TRADEMARKS.md](TRADEMARKS.md)。
