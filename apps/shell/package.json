@@ -1,7 +1,7 @@
 {
   "name": "harness7-shell",
   "productName": "Harness7",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Unofficial Electron 22 (Chromium 108) shell that runs DeepSeek Harness on Windows 7 SP1 x64.",
   "license": "MIT",

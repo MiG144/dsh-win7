@@ -16,6 +16,7 @@ const path = require('node:path');
 const { LocalHost } = require('./host');
 
 const APP_NAME = 'Harness7';
+const WINDOW_TITLE = 'Harness7 — DeepSeek Harness for Windows 7';
 const DEFAULT_BACKGROUND = '#0f1115';
 const SMOKE = process.argv.includes('--smoke') || process.argv.some((arg) => arg.startsWith('--smoke='));
 const SMOKE_ARG = process.argv.find((arg) => arg.startsWith('--smoke='));
@@ -167,17 +168,40 @@ function showAbout() {
   dialog.showMessageBox(mainWindow ?? undefined, {
     type: 'info',
     title: `关于 ${APP_NAME}`,
-    message: `${APP_NAME}（Windows 7 兼容外壳）`,
+    message: `${APP_NAME} ${app.getVersion()}`,
     detail: [
-      `版本：${app.getVersion()}`,
-      `Electron：${process.versions.electron} / Chromium：${process.versions.chrome}`,
-      `Host：${config.url}`,
+      '社区构建，用于在 Windows 7 上运行 DeepSeek Harness。',
       '',
-      '非官方项目，与 DeepSeek 无隶属关系。',
-      'DeepSeek Harness 是其权利人的产品，本项目只提供 Windows 7 上的运行外壳。',
+      `Electron ${process.versions.electron} / Chromium ${process.versions.chrome}`,
+      `本地服务：${config.url}`,
+      '',
+      '本构建与 DeepSeek 无隶属关系。',
     ].join('\n'),
     buttons: ['好'],
+    noLink: true,
   });
+}
+
+function maybeShowWelcome() {
+  if (SMOKE) return;
+  const marker = path.join(app.getPath('userData'), 'welcome-shown');
+  if (fs.existsSync(marker)) return;
+  dialog
+    .showMessageBox(mainWindow ?? undefined, {
+      type: 'info',
+      title: APP_NAME,
+      message: '在 Windows 7 上运行 DeepSeek Harness 的社区构建',
+      detail: ['界面和功能由 DeepSeek Harness 官方软件提供；', '本构建不是 DeepSeek 官方发布。'].join('\n'),
+      buttons: ['开始使用'],
+      noLink: true,
+    })
+    .then(() => {
+      try {
+        fs.writeFileSync(marker, new Date().toISOString());
+      } catch {
+        /* best effort */
+      }
+    });
 }
 
 function createTray() {
@@ -212,7 +236,7 @@ function createWindow() {
     minHeight: 600,
     show: false,
     backgroundColor: DEFAULT_BACKGROUND,
-    title: APP_NAME,
+    title: WINDOW_TITLE,
     icon: path.join(__dirname, '..', 'assets', 'icon.ico'),
     autoHideMenuBar: false,
     webPreferences: {
@@ -223,6 +247,12 @@ function createWindow() {
       spellcheck: false,
       backgroundThrottling: false,
     },
+  });
+
+  mainWindow.on('page-title-updated', (event) => {
+    // The Harness page sets its own title; keep the product identity stable.
+    event.preventDefault();
+    if (mainWindow && !mainWindow.isDestroyed()) mainWindow.setTitle(WINDOW_TITLE);
   });
 
   mainWindow.once('ready-to-show', () => {
@@ -327,6 +357,7 @@ async function boot() {
     const target = await resolveTarget();
     trace('loadURL ' + target);
     if (mainWindow && !mainWindow.isDestroyed()) mainWindow.loadURL(target);
+    maybeShowWelcome();
     if (SMOKE) runSmoke(target);
   } catch (error) {
     console.error('boot failed', error);
