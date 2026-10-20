@@ -15,9 +15,8 @@
 
 </div>
 
-> Harness7 keeps DeepSeek Harness usable on Windows 7. It bundles an Electron 22 shell,
-> a Node 22 runtime and the official Harness package into a single installer — double-click
-> and go, no second machine required.
+> The official build requires Windows 10 or later, so it will not install on Windows 7.
+> Harness7 repackages it for Win7: install, open, and go — no second machine, no Node setup.
 
 ![Harness7 running on Windows 7](docs/assets/win7-dsh-running.png)
 
