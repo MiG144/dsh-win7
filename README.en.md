@@ -15,15 +15,16 @@
 
 </div>
 
-> The official build requires Windows 10 or later, so it will not install on Windows 7.
-> Harness7 repackages it for Win7: install, open, and go — no second machine, no Node setup.
+> The official DeepSeek Harness build supports Windows 10 and later only. Harness7 provides a
+> Windows 7 runtime for it: the installer bundles the Node runtime and the official components,
+> so no additional setup is required.
 
 ![Harness7 running on Windows 7](docs/assets/win7-dsh-running.png)
 
 ## Features
 
 - **Self-contained** — the installer ships Node 22 and the Harness host; no server or VM needed
-- **Native Win7** — Electron 22 / Chromium 108; not remote desktop, not a web wrapper
+- **Native Win7** — Electron 22 / Chromium 108; not remote desktop or a browser wrapper
 - **No source changes** — runs the official `@deepseek-ai/dsh` package unmodified
 - **Process supervision** — starts the host, waits for the port, restarts on crash, cleans up on exit
 - **Offline-friendly** — only the model API is required after installation; no CDN dependency

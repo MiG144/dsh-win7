@@ -15,15 +15,15 @@
 
 </div>
 
-> 官方版只支持 Windows 10 及以上，Windows 7 装不了。Harness7 把它重新打包，让 Win7 也能用：
-> 装好就能打开，不用另找一台电脑，也不用自己折腾 Node 环境。
+> DeepSeek Harness 官方版本仅支持 Windows 10 及以上。Harness7 为其提供 Windows 7 运行环境：
+> 安装包包含 Node 运行时与官方组件，安装后即可使用，无需额外配置。
 
 ![Harness7 在 Windows 7 上运行](docs/assets/win7-dsh-running.png)
 
 ## 特性
 
 - **单机自包含** —— 安装包内置 Node 22 与 Harness Host，不需要额外服务器或虚拟机
-- **原生 Win7** —— Electron 22 / Chromium 108，不是远程桌面，也不是网页套壳
+- **原生 Win7** —— Electron 22 / Chromium 108，非远程桌面或浏览器封装
 - **零源码改动** —— 运行官方 `@deepseek-ai/dsh` 包，跟随上游升级，不打补丁
 - **进程自管理** —— 启动 Host、等待端口、崩溃重启、退出回收，用户只面对一个窗口
 - **离线可用** —— 安装后只需能访问模型 API，不依赖公网 CDN
