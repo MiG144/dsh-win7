@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * DSH Win7 Shell — a deliberately small Electron 22 (Chromium 108) desktop shell
+ * Harness7 — a deliberately small Electron 22 (Chromium 108) desktop shell
  * that puts a DeepSeek Harness Web Host into a native window on Windows 7 SP1 x64.
  *
  * It owns no Harness logic: it loads one HTTP(S) origin, keeps the browser
@@ -15,7 +15,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { LocalHost } = require('./host');
 
-const APP_NAME = 'DeepSeek Harness';
+const APP_NAME = 'Harness7';
 const DEFAULT_BACKGROUND = '#0f1115';
 const SMOKE = process.argv.includes('--smoke') || process.argv.some((arg) => arg.startsWith('--smoke='));
 const SMOKE_ARG = process.argv.find((arg) => arg.startsWith('--smoke='));
@@ -117,7 +117,7 @@ function errorPage(url, reason) {
   code{background:#1f2937;padding:2px 6px;border-radius:4px;word-break:break-all}
   p{color:#9ca3af}
   button{margin-top:18px;padding:8px 18px;border:0;border-radius:6px;background:#4d6bfe;color:#fff;cursor:pointer;font-size:14px}
-  </style><main><h1>无法连接 DeepSeek Harness Host</h1>
+  </style><main><h1>无法连接本地 Host</h1>
   <p>目标地址：<code>${url}</code></p>
   <p>${reason}</p>
   <p>请确认 Host 已启动、端口可达、隧道已连通，或 <code>shell.config.json</code> 中的地址与 token 正确。</p>
@@ -169,11 +169,12 @@ function showAbout() {
     title: `关于 ${APP_NAME}`,
     message: `${APP_NAME}（Windows 7 兼容外壳）`,
     detail: [
-      `外壳版本：${app.getVersion()}`,
+      `版本：${app.getVersion()}`,
       `Electron：${process.versions.electron} / Chromium：${process.versions.chrome}`,
       `Host：${config.url}`,
       '',
-      '外壳只承载 Web UI，不包含 Harness 运行时。',
+      '非官方项目，与 DeepSeek 无隶属关系。',
+      'DeepSeek Harness 是其权利人的产品，本项目只提供 Windows 7 上的运行外壳。',
     ].join('\n'),
     buttons: ['好'],
   });

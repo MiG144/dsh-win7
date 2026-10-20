@@ -1,4 +1,4 @@
-# dsh-win7 的第三方组件与商标说明
+# Harness7 的第三方组件与商标说明
 
 本项目代码以 MIT 发布（见 [LICENSE](LICENSE)）。
 分发安装包时会一并包含下列第三方组件，它们各自保留原有许可证：
@@ -7,7 +7,7 @@
 | --- | --- | --- | --- |
 | Electron | 22.3.27 | MIT | 桌面运行时（Chromium 108 / Node 16.17） |
 | Node.js（社区 Win7 构建） | 22.23.3 | MIT | Host 运行时，来源见 [DeftKing/nodejs-win7](https://github.com/DeftKing/nodejs-win7) |
-| DeepSeek Harness (`@deepseek-ai/*`) | 0.2.x | MIT | Host 与 Web UI，来自 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) |
+| DeepSeek Harness (`@deepseek-ai/*`) | 0.2.x | MIT | Host 与 Web UI，来自 [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)，随包保留其原始 LICENSE |
 | electron-builder 生成物 | — | MIT | NSIS 安装器框架 |
 
 **不随本项目分发**（需用户自行安装，仓库内不包含）：
@@ -16,8 +16,10 @@
 - 小狼毫 Rime（GPL-3.0）——用户自行从 [rime.im](https://rime.im/download/) 安装；
 - Windows 7 安装镜像——版权归微软。
 
-## 商标
+## 名称与图标
 
-"DeepSeek"、"DeepSeek Harness" 及其标识是杭州深度求索人工智能基础技术研究有限公司的商标。
-本项目为**非官方**兼容层，名称中的 "DSH" 仅用于描述兼容目标，不代表任何隶属、赞助或背书关系。
-分发本项目的二进制时，请勿使用官方 Logo，并保留本文件与 README 中的非官方声明。
+- 项目的应用图标、托盘图标、安装器图标均为**自绘图形**，不包含任何上游标识或美术作品。
+- 项目名 **Harness7** 是自取的；文档中出现的 "DeepSeek Harness" 仅用于说明兼容对象。
+- 详细的名称使用原则与同类项目的通行做法，见 [TRADEMARKS.md](TRADEMARKS.md)。
+
+> MIT 许可证授予的是代码版权许可，不包含商标权。本项目不对 DeepSeek 的名称或标识主张任何权利。

@@ -14,7 +14,7 @@
 ## 进程模型
 
 ```
-DSH-Win7.exe (Electron 外壳，主进程内置 LocalHost 管理器)
+Harness7.exe (Electron 外壳，主进程内置 LocalHost 管理器)
 └─ node.exe  host\dsh\...\lib\bin.js web --host 127.0.0.1:<port> --no-open
      └──HTTP/WS──► 127.0.0.1:<port>
 ```
@@ -24,7 +24,7 @@ DSH-Win7.exe (Electron 外壳，主进程内置 LocalHost 管理器)
 
 ## 启动时序
 
-1. 启动器读配置（`%APPDATA%\DSH-Win7\config.json`）
+1. 启动器读配置（`%APPDATA%\Harness7\config.json`）
 2. 拉起 Host，轮询 `GET http://127.0.0.1:3080/` 直到返回（超时 60 s）
 3. 起壳，壳加载 `http://127.0.0.1:3080/`
 4. 首次运行：Host 打印带 `?token=` 的地址，外壳用它换 cookie，之后免 token
@@ -39,14 +39,14 @@ DSH-Win7.exe (Electron 外壳，主进程内置 LocalHost 管理器)
 ## 磁盘布局
 
 ```
-%LOCALAPPDATA%\Programs\DSH Win7\
-├─ DSH-Win7.exe
+%LOCALAPPDATA%\Programs\Harness7\
+├─ Harness7.exe
 ├─ resources\
 │  ├─ app\                 外壳代码
 │  ├─ host\                Node + DSH Host（Phase 1）
 │  └─ shell.config.json    外壳配置（地址、token、GPU、缩放）
 └─ ...
-%APPDATA%\DSH-Win7\
+%APPDATA%\Harness7\
 ├─ config.json             模型与启动配置
 └─ logs\
 ```

@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="apps/shell/assets/icon-256.png" width="96" alt="DSH-Win7">
+<img src="apps/shell/assets/icon-256.png" width="96" alt="Harness7">
 
-# DSH-Win7
+# Harness7
 
-**在 Windows 7 SP1 x64 上本地运行 DeepSeek Harness**
+**在 Windows 7 SP1 x64 上运行 DeepSeek Harness 的非官方外壳**
 
 [![CI](https://github.com/MiG144/dsh-win7/actions/workflows/ci.yml/badge.svg)](https://github.com/MiG144/dsh-win7/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/MiG144/dsh-win7)](https://github.com/MiG144/dsh-win7/releases)
@@ -60,7 +60,7 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 | **Phase 1** | 单机安装包与便携版已发布（`v0.2.0`，内置 Node 22 + Host） | ✅ 已发布 |
 | Phase 2 | 终端、Office、语音等能力迁移 | 📋 计划中 |
 
-发布：`v0.2.0` 提供**单机安装包**（内置 Node 22 与 Host）；`v0.1.0` 只含外壳。
+发布：`v0.2.1` 起产品名为 **Harness7**，提供**单机安装包**（内置 Node 22 与 Host）。
 
 ## 系统要求
 
@@ -78,9 +78,9 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 ```
 ┌──────────────────── Windows 7 SP1 x64 ────────────────────┐
 │                                                            │
-│   DSH-Win7.exe（启动器）                                    │
+│   Harness7.exe（启动器）                                    │
 │     ├─ node.exe 22 ──► dsh web  --host 127.0.0.1:3080      │
-│     └─ DSH-Win7（Electron 22 / Chromium 108）               │
+│     └─ Harness7（Electron 22 / Chromium 108）               │
 │              └──HTTP/WS──► 127.0.0.1:3080                  │
 │                                                            │
 └──────────────────────────┬─────────────────────────────────┘
@@ -97,8 +97,8 @@ Windows 7（Electron 23 起、Node 18 起、Python 3.9 起陆续放弃 Win7）�
 
 从 [Releases](https://github.com/MiG144/dsh-win7/releases) 下载：
 
-- `DSH-Win7-<version>-setup.exe` —— 安装版
-- `DSH-Win7-<version>-portable.exe` —— 便携版
+- `Harness7-<version>-setup.exe` —— 安装版
+- `Harness7-<version>-portable.exe` —— 便携版
 
 下载后应核对 `SHA256SUMS.txt`。安装包**未签名**，Windows 会提示"未知发布者"。
 
@@ -164,6 +164,7 @@ dsh-win7/
 | [兼容性](docs/COMPATIBILITY.md) | 系统补丁、功能矩阵、Chromium 108 差异 |
 | [VM 搭建](docs/VM-SETUP.md) | 用虚拟机复现验证环境 |
 | [文档索引](docs/README.md) | 全部文档导航 |
+| [名称与商标](TRADEMARKS.md) | 为什么叫 Harness7、如何引用上游名称 |
 
 ## 路线图
 
@@ -210,13 +211,13 @@ dsh-win7/
 ## 许可证
 
 代码以 [MIT](LICENSE) 发布。第三方组件、字体与商标说明见 [NOTICE](NOTICE)。
-"DeepSeek"、"DeepSeek Harness" 是其权利人的商标，本项目仅作描述性使用。
+"DeepSeek"、"DeepSeek Harness" 是其权利人的商标，本项目仅作描述性使用；细节与处理方式见 [TRADEMARKS.md](TRADEMARKS.md)。
 
 ---
 
 ## English
 
-**DSH-Win7** is an unofficial, experimental port that runs [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
+**Harness7** is an unofficial, experimental port that runs [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
 natively on Windows 7 SP1 x64. It pairs an Electron 22 (Chromium 108) shell with a community
 Node.js 22 build for Windows 7, and runs the unmodified official Harness host on the same machine.
 

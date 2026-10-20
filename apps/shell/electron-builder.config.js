@@ -23,8 +23,8 @@ for (const [dir, to] of [
 }
 
 module.exports = {
-  appId: 'io.github.dshwin7.shell',
-  productName: 'DSH Win7',
+  appId: 'io.github.dshwin7.harness7',
+  productName: 'Harness7',
   directories: {
     output: 'dist',
     buildResources: 'assets',
@@ -48,9 +48,9 @@ module.exports = {
     perMachine: false,
     allowToChangeInstallationDirectory: true,
     deleteAppDataOnUninstall: false,
-    artifactName: 'DSH-Win7-${version}-setup.${ext}',
+    artifactName: 'Harness7-${version}-setup.${ext}',
   },
   portable: {
-    artifactName: 'DSH-Win7-${version}-portable.${ext}',
+    artifactName: 'Harness7-${version}-portable.${ext}',
   },
 };

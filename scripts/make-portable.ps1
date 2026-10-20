@@ -55,5 +55,5 @@ if (Test-Path (Join-Path $vendor 'host')) {
 $config = Join-Path $shell 'shell.config.json'
 if (Test-Path $config) { Copy-Item $config (Join-Path $Destination 'resources\shell.config.json') -Force }
 
-Rename-Item (Join-Path $Destination 'electron.exe') 'DSH Win7 Shell.exe'
+Rename-Item (Join-Path $Destination 'electron.exe') 'Harness7.exe'
 Write-Host "Portable build ready: $(Resolve-Path $Destination)"

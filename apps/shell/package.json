@@ -1,9 +1,9 @@
 {
-  "name": "dsh-win7-shell",
-  "productName": "DSH Win7",
-  "version": "0.2.0",
+  "name": "harness7-shell",
+  "productName": "Harness7",
+  "version": "0.2.1",
   "private": true,
-  "description": "Unofficial Electron 22 (Chromium 108) shell that runs the DeepSeek Harness web UI on Windows 7 SP1 x64.",
+  "description": "Unofficial Electron 22 (Chromium 108) shell that runs DeepSeek Harness on Windows 7 SP1 x64.",
   "license": "MIT",
   "author": "dsh-win7 contributors",
   "repository": {
