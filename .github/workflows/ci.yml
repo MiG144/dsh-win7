@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-shell:
+    name: Build shell (win32 x64)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: apps/shell
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/shell/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build unpacked app
+        run: npm run dist:dir
+
+      - name: Upload unpacked artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shell-win-unpacked
+          path: apps/shell/dist/win-unpacked
+          retention-days: 7

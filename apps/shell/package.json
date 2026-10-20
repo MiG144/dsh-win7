@@ -1,0 +1,65 @@
+{
+  "name": "dsh-win7-shell",
+  "productName": "DSH Win7",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Unofficial Electron 22 (Chromium 108) shell that runs the DeepSeek Harness web UI on Windows 7 SP1 x64.",
+  "license": "MIT",
+  "author": "dsh-win7 contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiG144/dsh-win7.git"
+  },
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "smoke": "electron . --smoke",
+    "dist": "electron-builder --win --x64 --publish never",
+    "dist:dir": "electron-builder --win --x64 --dir"
+  },
+  "devDependencies": {
+    "electron": "22.3.27",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "io.github.dshwin7.shell",
+    "productName": "DSH Win7",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "assets/tray.png",
+      "assets/icon.ico",
+      "package.json"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "DSH-Win7-${version}-setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "DSH-Win7-${version}-portable.${ext}"
+    }
+  }
+}

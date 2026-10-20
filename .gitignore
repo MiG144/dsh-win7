@@ -1,0 +1,22 @@
+# Build output
+node_modules/
+dist/
+out/
+*.log
+
+# Local configuration (may contain a launch token - never commit)
+shell.config.json
+apps/shell/shell.config.json
+
+# Installers and large test artifacts
+*.iso
+*.7z
+*.msi
+*.tar.gz
+*.zip
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

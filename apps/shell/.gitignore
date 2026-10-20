@@ -1,0 +1,6 @@
+node_modules/
+dist/
+shell.config.json
+shell-trace.log
+out.txt
+smoke*.png
