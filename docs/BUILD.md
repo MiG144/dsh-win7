@@ -93,4 +93,4 @@ Phase 1 会把 Host 一起打进安装包，流程：
 2. 把 `node\`（Node 22 Win7 构建）、`host\`（DSH 包）、`app\`（外壳）放进 `extraResources`
 3. electron-builder 产出单文件安装包，整包拷进内网
 
-详见 [PLAN.md](PLAN.md) Phase 1。
+

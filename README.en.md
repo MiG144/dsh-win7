@@ -64,16 +64,26 @@ flowchart LR
 The shell starts the host, waits until it is ready, then loads the UI. The host owns sessions,
 model calls and tool execution.
 
-## Status
+## Capabilities
 
-| Phase | Scope | State |
-| --- | --- | --- |
-| Phase 0 | Node 22 + official host running on Win7 | ✅ verified |
-| Phase 1 | Self-contained installer (shell + runtime + host) | ✅ released |
-| Phase 2 | Terminal, Office and other capabilities | 📋 planned |
+**Works today**
 
-See [Releases](https://github.com/MiG144/dsh-win7/releases) for the latest build and
-[docs/PLAN.md](docs/PLAN.md) for the full plan.
+| Capability | Notes |
+| --- | --- |
+| Chat | Text conversation, streaming output, multiple sessions |
+| Workspace | File read/write, syntax highlighting, Markdown preview |
+| Models | Any OpenAI-compatible API, intranet or public |
+| Desktop | Tray, single instance, window state, reconnect |
+
+**Not supported yet**
+
+| Capability | Why |
+| --- | --- |
+| Terminal | `node-pty` ConPTY requires Windows 10 1809+ |
+| Office skills | Depend on Python 3.12, which cannot run on Windows 7 |
+| Auto-update, code signing | Requires a certificate and a stable distribution channel |
+
+> Windows 7 is out of support; deploy on a controlled network.
 
 ## Documentation
 
@@ -81,20 +91,12 @@ The docs are written in Chinese. Entry points:
 
 | Document | Content |
 | --- | --- |
-| [docs/PLAN.md](docs/PLAN.md) | Phases, acceptance criteria, risks |
 | [docs/PHASE0.md](docs/PHASE0.md) · [docs/PHASE1.md](docs/PHASE1.md) | Win7 verification records |
 | [docs/FEASIBILITY.md](docs/FEASIBILITY.md) | Why this stack |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Process model and auth |
 | [docs/BUILD.md](docs/BUILD.md) | Packaging, CI, offline distribution |
 | [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) | Patches and feature matrix |
 | [docs/FAQ.md](docs/FAQ.md) | Install, networking, data locations |
-| [docs/BACKLOG.md](docs/BACKLOG.md) | Planned work |
-
-## Limitations
-
-- **No terminal or Office skills yet** — scheduled for Phase 2
-- **Chromium 108** — a few modern CSS features degrade gracefully
-- **Windows 7 is out of support** — deploy on a controlled network
 
 ## Contributing
 

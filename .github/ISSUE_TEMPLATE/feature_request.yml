@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        请先阅读 [路线图](../README.md#路线图) 与 [项目计划](../docs/PLAN.md)，
+        请先阅读 [README](../README.md) 的能力说明，
         避免与已完成/已排期的条目重复。
 
   - type: textarea

@@ -44,7 +44,7 @@ Windows 7 **SP1 x64**。32 位系统不支持：Harness 的运行时和原生模
 ## 有终端和 Office 功能吗？
 
 还没有。终端依赖 `node-pty` 的 ConPTY（需要 Win10 1809+），Office 技能依赖 Python 3.12。
-两者都在 [待办](BACKLOG.md) 的 Phase 2 里。
+两者目前都不支持，也没有时间表。
 
 ## 安装包为什么没有签名？
 

@@ -3,7 +3,7 @@
 Electron **22.3.27**（Chromium 108 / Node 16.17）外壳，把 DSH 的 Web UI 装进一个
 Windows 7 SP1 x64 能跑的原生窗口。Electron 23 起不再支持 Win7，22 是终点。
 
-> 仓库定位与阶段计划见 [../../docs/PLAN.md](../../docs/PLAN.md)；
+> 背景与实测记录见 [../../docs/PHASE0.md](../../docs/PHASE0.md)；
 > Win7 实测结果见 [../../docs/FEASIBILITY.md](../../docs/FEASIBILITY.md)；
 > 兼容性细节见 [../../docs/COMPATIBILITY.md](../../docs/COMPATIBILITY.md)。
 

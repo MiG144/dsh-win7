@@ -63,34 +63,37 @@ flowchart LR
 
 外壳启动 Host、等待就绪后加载界面；Host 负责会话、模型调用与工具执行。
 
-## 状态
+## 能力
 
-| 阶段 | 内容 | 状态 |
-| --- | --- | --- |
-| Phase 0 | Node 22 + 官方 Host 在 Win7 本机运行 | ✅ 已验证 |
-| Phase 1 | 自包含安装包（外壳 + 运行时 + Host） | ✅ 已发布 |
-| Phase 2 | 终端、Office 等能力迁移 | 📋 计划中 |
+**可以使用**
 
-最新版本见 [Releases](https://github.com/MiG144/dsh-win7/releases)，完整计划见 [项目计划](docs/PLAN.md)。
+| 能力 | 说明 |
+| --- | --- |
+| 对话 | 文本对话、流式输出、多会话 |
+| 工作区 | 文件读写、代码高亮、Markdown 预览 |
+| 模型 | 任意 OpenAI 兼容 API，内网或公网 |
+| 桌面 | 托盘、单实例、窗口位置记忆、断线重连 |
+
+**暂不支持**
+
+| 能力 | 原因 |
+| --- | --- |
+| 终端 | `node-pty` 的 ConPTY 需要 Windows 10 1809 及以上 |
+| Office 技能 | 依赖 Python 3.12，Windows 7 无法运行 |
+| 自动更新、代码签名 | 需要证书与稳定的分发通道 |
+
+> Windows 7 已停止安全更新，建议部署在受控网络。
 
 ## 文档
 
 | 文档 | 内容 |
 | --- | --- |
-| [项目计划](docs/PLAN.md) | 阶段划分、验收标准、风险 |
 | [Phase 0](docs/PHASE0.md) · [Phase 1](docs/PHASE1.md) | Win7 实机验证记录 |
 | [可行性报告](docs/FEASIBILITY.md) | 技术选型论证 |
 | [架构](docs/ARCHITECTURE.md) | 进程模型、鉴权、目录布局 |
 | [构建](docs/BUILD.md) | 打包、CI、离线分发 |
 | [兼容性](docs/COMPATIBILITY.md) | 系统补丁、功能矩阵 |
 | [常见问题](docs/FAQ.md) | 安装、网络、数据位置 |
-| [待办](docs/BACKLOG.md) | 计划中的工作 |
-
-## 已知限制
-
-- **终端与 Office 技能**尚未支持，计划在 Phase 2 迁移
-- **Chromium 108**：少量新 CSS 特性降级，不影响功能
-- **Windows 7 已停止安全更新**：建议部署在受控网络
 
 ## 参与
 
